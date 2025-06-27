@@ -13,9 +13,38 @@ def get_problem_details_api_query(titleSlug:str) -> dict:
 
     return query
 
+import json # Required for json.JSONDecodeError
+
 def call_api(query:dict) -> dict:
-    
     base_url = "https://leetcode.com/graphql/"
-    response = response = requests.post(base_url, json=query).json()
-    
-    return response['data']
+    try:
+        response = requests.post(base_url, json=query, timeout=20) # Added timeout
+        response.raise_for_status() # Raises HTTPError for bad responses (4XX or 5XX)
+
+        # Check content type before trying to decode JSON, though LeetCode API should be consistent
+        # content_type = response.headers.get("Content-Type", "")
+        # if "application/json" not in content_type:
+        #     print(f"API Error: Unexpected content type '{content_type}'. Response text: {response.text[:500]}")
+        #     return None # Or handle as appropriate
+
+        return response.json().get('data') # Safely get 'data' key
+
+    except requests.exceptions.HTTPError as http_err:
+        print(f"API HTTP error occurred: {http_err} - Status Code: {response.status_code} - Response: {response.text[:500]}")
+        return None
+    except requests.exceptions.ConnectionError as conn_err:
+        print(f"API Connection error occurred: {conn_err}")
+        return None
+    except requests.exceptions.Timeout as timeout_err:
+        print(f"API Timeout error occurred: {timeout_err}")
+        return None
+    except requests.exceptions.RequestException as req_err:
+        print(f"API Ambiguous request error occurred: {req_err}")
+        return None
+    except json.JSONDecodeError as json_err:
+        # This will catch cases where response.text is not valid JSON
+        print(f"API JSONDecodeError: {json_err}. Response text: {response.text[:500]}") # Log part of response
+        return None
+    except Exception as e: # Catch any other unexpected errors
+        print(f"An unexpected error occurred in call_api: {e}")
+        return None

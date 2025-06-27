@@ -3,3 +3,4 @@
 *.pyc
 
 __pycache__
+data/all_questions_data/*.json
