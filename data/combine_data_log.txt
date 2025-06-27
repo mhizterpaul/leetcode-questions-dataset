@@ -1,0 +1,17 @@
+2025-06-27 21:41:19 - Starting data combination process...
+2025-06-27 21:41:19 - Loading question list from: data/questions_list.csv
+2025-06-27 21:41:19 - Loaded 3834 rows from data/questions_list.csv.
+2025-06-27 21:41:19 - Loading detailed questions data from: data/all_questions_details_cumulative.csv
+2025-06-27 21:41:19 - Loaded 3500 rows from data/all_questions_details_cumulative.csv.
+2025-06-27 21:41:19 - Renamed columns in df_details for clarity: ['details_question_id', 'Question Title', 'details_question_slug', 'Topic Tagged text', 'Topic Tagged ID', 'details_content_text', 'details_difficulty', 'Success Rate', 'total submission', 'total accepted', 'company tag', 'details_likes', 'details_dislikes', 'details_hints_text', 'Similar Questions ID', 'Similar Questions Text']
+2025-06-27 21:41:19 - Merging DataFrames. Left table: df_qlist (3834 rows), Right table: df_details (3500 rows).
+2025-06-27 21:41:19 - df_details de-duplicated to 3479 rows on 'details_question_id' before merging.
+2025-06-27 21:41:19 - df_qlist columns before merge: ['Question ID', 'Question Title', 'Question Slug', 'Topic Tagged text', 'Topic Tagged ID']
+2025-06-27 21:41:19 - df_details columns before merge: ['details_question_id', 'Question Title', 'details_question_slug', 'Topic Tagged text', 'Topic Tagged ID', 'details_content_text', 'details_difficulty', 'Success Rate', 'total submission', 'total accepted', 'company tag', 'details_likes', 'details_dislikes', 'details_hints_text', 'Similar Questions ID', 'Similar Questions Text']
+2025-06-27 21:41:19 - Merged DataFrame shape: (3834, 21)
+2025-06-27 21:41:19 - df_merged columns after merge: ['Question ID', 'Question Title_qlist', 'Question Slug', 'Topic Tagged text_qlist', 'Topic Tagged ID_qlist', 'details_question_id', 'Question Title_details', 'details_question_slug', 'Topic Tagged text_details', 'Topic Tagged ID_details', 'details_content_text', 'details_difficulty', 'Success Rate', 'total submission', 'total accepted', 'company tag', 'details_likes', 'details_dislikes', 'details_hints_text', 'Similar Questions ID', 'Similar Questions Text']
+2025-06-27 21:41:19 - Final DataFrame columns: ['Question ID', 'Question Title', 'Question Slug', 'Topic Tagged text', 'Topic Tagged ID', 'Question Text', 'Difficulty Level', 'Likes', 'Dislikes', 'Success Rate', 'Total Submissions', 'Total Accepted', 'Company Tags', 'Hints', 'Similar Questions ID', 'Similar Questions Text', 'Code Snippets (Python3 or All)']
+2025-06-27 21:41:19 - Final DataFrame shape before final de-duplication: (3834, 17)
+2025-06-27 21:41:19 - Removed 338 duplicates based on 'Question ID Numeric'.
+2025-06-27 21:41:19 - Successfully combined data and saved to data/all_questions.csv. Final shape: (3496, 17)
+2025-06-27 21:41:19 - Data combination process finished.
