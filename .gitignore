@@ -6,3 +6,5 @@ __pycache__
 data/all_questions_data/*.json
 venv
 .env
+data/mcq_dataset.csv
+data/mcq_dataset_enriched.csv
